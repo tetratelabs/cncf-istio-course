@@ -1,0 +1,85 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: productpage-sidecar
+  namespace: default
+spec:
+  workloadSelector:
+    labels:
+      app: productpage
+  egress:
+  - hosts:
+    - "./reviews.default.svc.cluster.local"
+    - "./details.default.svc.cluster.local"
+    - "istio-system/*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: reviews-v1-sidecar
+  namespace: default
+spec:
+  workloadSelector:
+    labels:
+      app: reviews
+      version: v1
+  egress:
+  - hosts:
+    - "istio-system/*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: reviews-v2-sidecar
+  namespace: default
+spec:
+  workloadSelector:
+    labels:
+      app: reviews
+      version: v2
+  egress:
+  - hosts:
+    - "./ratings.default.svc.cluster.local"
+    - "istio-system/*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: reviews-v3-sidecar
+  namespace: default
+spec:
+  workloadSelector:
+    labels:
+      app: reviews
+      version: v3
+  egress:
+  - hosts:
+    - "./ratings.default.svc.cluster.local"
+    - "istio-system/*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: details-sidecar
+  namespace: default
+spec:
+  workloadSelector:
+    labels:
+      app: details
+  egress:
+  - hosts:
+    - "istio-system/*"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: ratings-sidecar
+  namespace: default
+spec:
+  workloadSelector:
+    labels:
+      app: ratings
+  egress:
+  - hosts:
+    - "istio-system/*"
