@@ -1,0 +1,13 @@
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: wasm-example
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  url: oci://[REPOSITORY]/wasm:v1
+  pluginConfig:
+    header_1: "first_header"
+    header_2: "second_header"

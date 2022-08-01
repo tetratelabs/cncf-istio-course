@@ -1,0 +1,17 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-web-frontend-customers
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+        app: customers
+        version: v1
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces: ["default"]
+      source:
+        principals: ["cluster.local/ns/default/sa/web-frontend"]

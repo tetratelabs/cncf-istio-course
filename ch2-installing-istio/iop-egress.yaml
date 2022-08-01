@@ -1,0 +1,11 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: demo-istio-install
+spec:
+  profile: demo
+  components:
+    egressGateways:
+    - name: istio-egressgateway
+      enabled: false
